@@ -20,6 +20,14 @@ public class Address implements Serializable {
 
     public Address(){};
 
+    public Address(Long id, String logradouro, String CEP, String houseNumber, String city) {
+        this.id = id;
+        this.logradouro = logradouro;
+        this.CEP = CEP;
+        this.houseNumber = houseNumber;
+        this.city = city;
+    }
+
     public Address(Long id, String logradouro, String CEP, String houseNumber, String city, Person person) {
         this.id = id;
         this.logradouro = logradouro;
