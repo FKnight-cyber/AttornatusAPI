@@ -38,6 +38,6 @@ public class PersonController {
     @PostMapping(value = "/add")
     public ResponseEntity<Person> insert(@RequestBody Person person) {
         service.insert(person);
-        return new ResponseEntity("Person successfully registered!", HttpStatus.CREATED);
+        return new ResponseEntity(person.getName() + " successfully registered!", HttpStatus.CREATED);
     }
 }
