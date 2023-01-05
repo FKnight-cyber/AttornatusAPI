@@ -1,5 +1,6 @@
 package com.attornatuschallenge.personapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,17 +16,19 @@ public class Address implements Serializable {
     private String CEP;
     private String houseNumber;
     private String city;
+    private Boolean main = false;
     @ManyToOne(fetch = FetchType.LAZY)
     private Person person;
 
-    public Address(){};
+    public Address(){}
 
-    public Address(Long id, String logradouro, String CEP, String houseNumber, String city) {
+    public Address(Long id, String logradouro, String CEP, String houseNumber, String city, Boolean main) {
         this.id = id;
         this.logradouro = logradouro;
         this.CEP = CEP;
         this.houseNumber = houseNumber;
         this.city = city;
+        this.main = main;
     }
 
     public Address(Long id, String logradouro, String CEP, String houseNumber, String city, Person person) {
@@ -77,8 +80,18 @@ public class Address implements Serializable {
         this.person = person;
     }
 
+    @JsonIgnore
     public Long getPersonId() {
         return person.getId();
+    }
+
+    @Transient
+    public Boolean getMain() {
+        return main;
+    }
+
+    public void setMain(Boolean main) {
+        this.main = main;
     }
 
     @Override

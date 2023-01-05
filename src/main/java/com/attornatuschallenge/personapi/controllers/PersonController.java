@@ -2,6 +2,7 @@ package com.attornatuschallenge.personapi.controllers;
 
 import com.attornatuschallenge.personapi.entities.Address;
 import com.attornatuschallenge.personapi.entities.Person;
+import com.attornatuschallenge.personapi.services.AddressService;
 import com.attornatuschallenge.personapi.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,12 @@ public class PersonController {
     public ResponseEntity<List<Address>> getPersonAddresses(@PathVariable Long id) {
         Person person = service.findById(id);
         return ResponseEntity.ok().body(person.getAddresses());
+    }
+
+    @GetMapping(value = "/{id}/address/main")
+    public ResponseEntity<Person> getPersonMainAddress(@PathVariable Long id) {
+        Person response = service.mainAddressInfo(id);
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping(value = "/name")

@@ -32,6 +32,10 @@ public class AddressController {
     public ResponseEntity<Address> insert(@RequestBody Address address, @PathVariable Long id) {
         Person person = personService.findById(id);
         service.insert(address, id);
-        return new ResponseEntity("Added " + person.getName() +"'s new address", HttpStatus.CREATED);
+        if(address.getMain()) {
+            person.setMainAddressId(address.getId());
+            personService.update(id, person);
+        }
+        return new ResponseEntity("Added " + person.getName() + "'s new address ", HttpStatus.CREATED);
     }
 }

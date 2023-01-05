@@ -38,6 +38,12 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.smattme</groupId>
+			<artifactId>request-validator</artifactId>
+			<version>0.0.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

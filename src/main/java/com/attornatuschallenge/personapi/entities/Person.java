@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity(name = "Person")
@@ -14,6 +15,7 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue
     private Long Id;
+    private Long mainAddressId;
     private String name;
     private String birthDate;
     @OneToMany(
@@ -54,17 +56,26 @@ public class Person implements Serializable {
         return addresses;
     }
 
+    public Long getId() {
+        return Id;
+    }
+
     public void addAddress(Address address) {
         addresses.add(address);
         address.setPerson(this);
     }
 
+    @JsonIgnore
+    public Long getMainAddressId() {
+        return mainAddressId;
+    }
+
+    public void setMainAddressId(Long mainAddressId) {
+        this.mainAddressId = mainAddressId;
+    }
+
     public void removeAddress(Address address) {
         addresses.remove(address);
         address.setPerson(null);
-    }
-
-    public Long getId() {
-        return Id;
     }
 }
