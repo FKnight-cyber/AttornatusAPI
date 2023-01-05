@@ -31,6 +31,12 @@ public class PersonController {
         return ResponseEntity.ok().body(person);
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Person> update(@PathVariable Long id, @RequestBody Person person) {
+        person = service.update(id, person);
+        return new ResponseEntity(person.getName() + "'s data successfully updated!", HttpStatus.OK);
+    }
+
     @GetMapping(value = "/{id}/address")
     public ResponseEntity<List<Address>> getPersonAddresses(@PathVariable Long id) {
         Person person = service.findById(id);

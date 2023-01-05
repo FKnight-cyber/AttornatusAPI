@@ -77,6 +77,10 @@ public class Address implements Serializable {
         this.person = person;
     }
 
+    public Long getPersonId() {
+        return person.getId();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

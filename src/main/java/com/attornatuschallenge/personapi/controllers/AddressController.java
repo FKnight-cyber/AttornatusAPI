@@ -21,6 +21,13 @@ public class AddressController {
     @Autowired
     PersonService personService;
 
+    @PutMapping(value = "/address/{id}")
+    public ResponseEntity<Address> update(@RequestBody Address address, @PathVariable Long id) {
+        Address result = service.update(id, address);
+        Person person = personService.findById(result.getPersonId());
+        return new ResponseEntity("Updated " + person.getName() +"'s address info", HttpStatus.OK);
+    }
+
     @PostMapping(value = "/{id}/address/add")
     public ResponseEntity<Address> insert(@RequestBody Address address, @PathVariable Long id) {
         Person person = personService.findById(id);

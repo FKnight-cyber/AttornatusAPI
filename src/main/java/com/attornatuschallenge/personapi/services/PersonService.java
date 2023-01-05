@@ -31,4 +31,14 @@ public class PersonService {
     public Person insert(Person person) {
         return repository.save(person);
     }
+
+    public Person update(Long id, Person person) {
+        Person entity = repository.getReferenceById(id);
+        updateData(entity, person);
+        return repository.save(entity);
+    }
+
+    private void updateData(Person entity, Person person) {
+        entity.setName(person.getName());
+    }
 }

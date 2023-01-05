@@ -24,4 +24,17 @@ public class AddressService {
         person.get().addAddress(address);
         return repository.save(address);
     }
+
+    public Address update(Long id, Address address) {
+        Address entity = repository.getReferenceById(id);
+        updateData(entity, address);
+        return repository.save(entity);
+    }
+
+    private void updateData(Address entity, Address address) {
+        entity.setLogradouro(address.getLogradouro());
+        entity.setCEP(address.getCEP());
+        entity.setHouseNumber(address.getHouseNumber());
+        entity.setCity(address.getCity());
+    }
 }
