@@ -1,5 +1,6 @@
 package com.attornatuschallenge.personapi.controllers;
 
+import com.attornatuschallenge.personapi.entities.Address;
 import com.attornatuschallenge.personapi.entities.Person;
 import com.attornatuschallenge.personapi.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class PersonController {
     public ResponseEntity<Person> findById(@PathVariable Long id) {
         Person person = service.findById(id);
         return ResponseEntity.ok().body(person);
+    }
+
+    @GetMapping(value = "/{id}/address")
+    public ResponseEntity<List<Address>> getPersonAddresses(@PathVariable Long id) {
+        Person person = service.findById(id);
+        return ResponseEntity.ok().body(person.getAddresses());
     }
 
     @GetMapping(value = "/name")
