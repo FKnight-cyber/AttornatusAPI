@@ -12,23 +12,23 @@ import java.util.Optional;
 public class PersonService {
 
     @Autowired
-    PersonRepository personRepository;
+    PersonRepository repository;
 
     public List<Person> findAll() {
-        return personRepository.findAll();
+        return repository.findAll();
     }
 
     public Person findById(Long id) {
-        Optional<Person> person = personRepository.findById(id);
+        Optional<Person> person = repository.findById(id);
         return person.get();
     };
 
     public List<Person> findByName(String name) {
-        List<Person> people = personRepository.findByName(name);
+        List<Person> people = repository.findByName(name);
         return people;
     };
 
     public Person insert(Person person) {
-        return personRepository.save(person);
+        return repository.save(person);
     }
 }

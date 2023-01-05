@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,9 +37,9 @@ public class PersonController {
        return new ResponseEntity<List<Person>>(service.findByName(name), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping(value = "/add")
     public ResponseEntity<Person> insert(@RequestBody Person person) {
-        person = service.insert(person);
-        return ResponseEntity.ok().body(person);
+        service.insert(person);
+        return new ResponseEntity("Person successfully registered!", HttpStatus.CREATED);
     }
 }
