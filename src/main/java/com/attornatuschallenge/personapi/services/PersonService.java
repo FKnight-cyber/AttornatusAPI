@@ -23,6 +23,11 @@ public class PersonService {
         return person.get();
     };
 
+    public List<Person> findByName(String name) {
+        List<Person> people = personRepository.findByName(name);
+        return people;
+    };
+
     public Person insert(Person person) {
         return personRepository.save(person);
     }

@@ -3,6 +3,7 @@ package com.attornatuschallenge.personapi.controllers;
 import com.attornatuschallenge.personapi.entities.Person;
 import com.attornatuschallenge.personapi.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,11 @@ public class PersonController {
     public ResponseEntity<Person> findById(@PathVariable Long id) {
         Person person = service.findById(id);
         return ResponseEntity.ok().body(person);
+    }
+
+    @GetMapping(value = "/name")
+    public ResponseEntity<List<Person>> findByName(@RequestParam String name) {
+       return new ResponseEntity<List<Person>>(service.findByName(name), HttpStatus.OK);
     }
 
     @PostMapping
