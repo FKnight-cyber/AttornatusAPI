@@ -25,13 +25,13 @@ public class AddressController {
     @PutMapping(value = "/address/{id}")
     public ResponseEntity<Address> update(@Valid @RequestBody Address address, @PathVariable Long id) {
         Address result = service.update(id, address);
-        Person person = personService.findById(result.getPersonId());
+        Person person = personService.findPersonAllInfoById(result.getPersonId());
         return new ResponseEntity("Updated " + person.getName() +"'s address info", HttpStatus.OK);
     }
 
     @PostMapping(value = "/{id}/address/add")
     public ResponseEntity<Address> insert(@Valid @RequestBody Address address, @PathVariable Long id) {
-        Person person = personService.findById(id);
+        Person person = personService.findPersonAllInfoById(id);
         service.insert(address, id);
         if(address.getMain()) {
             person.setMainAddressId(address.getId());

@@ -76,6 +76,4 @@ public class Person implements Serializable {
     public void setMainAddressId(Long mainAddressId) {
         this.mainAddressId = mainAddressId;
     }
-
-
 }

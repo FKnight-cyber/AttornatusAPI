@@ -2,6 +2,7 @@ package com.attornatuschallenge.personapi.controllers;
 
 import com.attornatuschallenge.personapi.entities.Address;
 import com.attornatuschallenge.personapi.entities.Person;
+import com.attornatuschallenge.personapi.entities.PersonResponseData;
 import com.attornatuschallenge.personapi.services.PersonService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,16 @@ public class PersonController {
     private PersonService service;
 
     @GetMapping
-    public ResponseEntity<List<Person>> getRegisteredPeople() {
+    public ResponseEntity<List<PersonResponseData>> getRegisteredPeople() {
 
-        List<Person> list = service.findAll();
+        List<PersonResponseData> list = service.findAll();
 
         return ResponseEntity.ok().body(list);
     };
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Person> findById(@PathVariable Long id) {
-        Person person = service.findById(id);
+    public ResponseEntity<PersonResponseData> findById(@PathVariable Long id) {
+        PersonResponseData person = service.findById(id);
         return ResponseEntity.ok().body(person);
     }
 
@@ -40,7 +41,7 @@ public class PersonController {
 
     @GetMapping(value = "/{id}/address")
     public ResponseEntity<List<Address>> getPersonAddresses(@PathVariable Long id) {
-        Person person = service.findById(id);
+        Person person = service.findPersonAllInfoById(id);
         return ResponseEntity.ok().body(person.getAddresses());
     }
 
@@ -51,7 +52,7 @@ public class PersonController {
     }
 
     @GetMapping(value = "/name")
-    public ResponseEntity<List<Person>> findByName(@RequestParam String name) {
+        public ResponseEntity<List<Person>> findByName(@RequestParam String name) {
        return new ResponseEntity<List<Person>>(service.findByName(name), HttpStatus.OK);
     }
 
