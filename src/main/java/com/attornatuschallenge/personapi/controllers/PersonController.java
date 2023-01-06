@@ -2,8 +2,8 @@ package com.attornatuschallenge.personapi.controllers;
 
 import com.attornatuschallenge.personapi.entities.Address;
 import com.attornatuschallenge.personapi.entities.Person;
-import com.attornatuschallenge.personapi.services.AddressService;
 import com.attornatuschallenge.personapi.services.PersonService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +56,7 @@ public class PersonController {
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity<Person> insert(@RequestBody Person person) {
+    public ResponseEntity<Person> insert(@Valid @RequestBody Person person) {
         service.insert(person);
         return new ResponseEntity(person.getName() + " successfully registered!", HttpStatus.CREATED);
     }
