@@ -3,9 +3,13 @@ package com.attornatuschallenge.personapi.services;
 import com.attornatuschallenge.personapi.entities.Address;
 import com.attornatuschallenge.personapi.entities.Person;
 import com.attornatuschallenge.personapi.repositories.PersonRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +29,7 @@ public class PersonService {
 
     public Person findById(Long id) {
         Optional<Person> person = repository.findById(id);
-        return person.get();
+        return person.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There's no person registered with this id!"));
     };
 
     public List<Person> findByName(String name) {
@@ -50,9 +54,13 @@ public class PersonService {
     }
 
     public Person update(Long id, Person person) {
-        Person entity = repository.getReferenceById(id);
-        updateData(entity, person);
-        return repository.save(entity);
+        try {
+            Person entity = repository.getReferenceById(id);
+            updateData(entity, person);
+            return repository.save(entity);
+        }catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There's no person registered with this id!");
+        }
     }
 
     private void updateData(Person entity, Person person) {

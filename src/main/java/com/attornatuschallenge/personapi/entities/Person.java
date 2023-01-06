@@ -73,9 +73,4 @@ public class Person implements Serializable {
     public void setMainAddressId(Long mainAddressId) {
         this.mainAddressId = mainAddressId;
     }
-
-    public void removeAddress(Address address) {
-        addresses.remove(address);
-        address.setPerson(null);
-    }
 }
