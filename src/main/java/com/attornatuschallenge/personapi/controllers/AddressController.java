@@ -4,6 +4,7 @@ import com.attornatuschallenge.personapi.entities.Address;
 import com.attornatuschallenge.personapi.entities.Person;
 import com.attornatuschallenge.personapi.services.AddressService;
 import com.attornatuschallenge.personapi.services.PersonService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,14 @@ public class AddressController {
     PersonService personService;
 
     @PutMapping(value = "/address/{id}")
-    public ResponseEntity<Address> update(@RequestBody Address address, @PathVariable Long id) {
+    public ResponseEntity<Address> update(@Valid @RequestBody Address address, @PathVariable Long id) {
         Address result = service.update(id, address);
         Person person = personService.findById(result.getPersonId());
         return new ResponseEntity("Updated " + person.getName() +"'s address info", HttpStatus.OK);
     }
 
     @PostMapping(value = "/{id}/address/add")
-    public ResponseEntity<Address> insert(@RequestBody Address address, @PathVariable Long id) {
+    public ResponseEntity<Address> insert(@Valid @RequestBody Address address, @PathVariable Long id) {
         Person person = personService.findById(id);
         service.insert(address, id);
         if(address.getMain()) {

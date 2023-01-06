@@ -23,9 +23,9 @@ public class TestConfig implements CommandLineRunner {
         Person person2  = new Person(null, "Cicrano", "13/12/1995");
         Person person3  = new Person(null, "Fulano de Tal", "20/02/1994");
 
-        Address address1 = new Address(null, "Rua tal", "60730-012", "1432", "Fortaleza", person1);
-        Address address2 = new Address(null, "Rua fulana", "61430-112", "765", "Jacarecanga", person2);
-        Address address3 = new Address(null, "Rua distante de tudo", "61535-111", "567", "Nowhere", person3);
+        Address address1 = new Address(null, "Rua tal", "60730012", "1432", "Fortaleza", person1);
+        Address address2 = new Address(null, "Rua fulana", "61430112", "765", "Jacarecanga", person2);
+        Address address3 = new Address(null, "Rua distante de tudo", "61535111", "567", "Nowhere", person3);
 
         person1.addAddress(address1);
         person2.addAddress(address2);

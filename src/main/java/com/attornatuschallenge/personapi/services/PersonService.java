@@ -39,9 +39,15 @@ public class PersonService {
 
     public Person mainAddressInfo(Long id) {
         Person person = findById(id);
+
+        if(person.getMainAddressId() == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This person hasn't registered a main address yet!");
+        }
+
         Address address = addressService.findById(person.getMainAddressId());
 
         List<Address> mainAddress = new ArrayList<>();
+
         mainAddress.add(address);
 
         Person result = new Person(person.getId(), person.getName(), person.getBirthDate(), mainAddress);

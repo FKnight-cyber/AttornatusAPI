@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity(name = "Person")
 @Table(name = "person")
@@ -16,7 +17,9 @@ public class Person implements Serializable {
     @GeneratedValue
     private Long Id;
     private Long mainAddressId;
+    @NotEmpty(message = "Name is required.")
     private String name;
+    @NotEmpty(message = "Birthdate is required.")
     private String birthDate;
     @OneToMany(
             mappedBy = "person",
@@ -73,4 +76,6 @@ public class Person implements Serializable {
     public void setMainAddressId(Long mainAddressId) {
         this.mainAddressId = mainAddressId;
     }
+
+
 }

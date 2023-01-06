@@ -2,6 +2,7 @@ package com.attornatuschallenge.personapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
 
@@ -12,11 +13,16 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
+    @NotEmpty(message = "Logradouro is required.")
     private String logradouro;
+    @Pattern(regexp = "^[0-9]{8}$", message = "Invalid CEP")
     private String CEP;
+    @NotEmpty(message = "House number is required.")
     private String houseNumber;
+    @NotEmpty(message = "City is required.")
     private String city;
-    private Boolean main = false;
+    @NotNull(message = "Main Address check is required.")
+    private Boolean main;
     @ManyToOne(fetch = FetchType.LAZY)
     private Person person;
 
@@ -38,6 +44,7 @@ public class Address implements Serializable {
         this.houseNumber = houseNumber;
         this.city = city;
         this.person = person;
+        this.main = false;
     }
 
     public Long getId() {
