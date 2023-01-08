@@ -4,6 +4,12 @@ public class PersonRequestData {
     private String name;
     private String birthDate;
 
+    public PersonRequestData() {}
+
+    public PersonRequestData(String name) {
+        this.name = name;
+    }
+
     public PersonRequestData(String name, String birthDate) {
         this.name = name;
         this.birthDate = birthDate;
@@ -19,9 +25,5 @@ public class PersonRequestData {
 
     public String getBirthDate() {
         return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
     }
 }

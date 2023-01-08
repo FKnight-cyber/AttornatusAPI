@@ -31,6 +31,9 @@ public class TestConfig implements CommandLineRunner {
         person2.addAddress(address2);
         person3.addAddress(address3);
 
+        person3.setMainAddressId(Long.valueOf(3));
+        address3.setMain(true);
+
         personRepository.saveAll(Arrays.asList(person1, person2, person3));
     }
 

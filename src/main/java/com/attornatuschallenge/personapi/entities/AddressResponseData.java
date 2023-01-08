@@ -1,12 +1,17 @@
 package com.attornatuschallenge.personapi.entities;
 
-public class AddressResponseData {
+import java.io.Serializable;
+
+public class AddressResponseData implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
     private String logradouro;
     private String cep;
     private String houseNumber;
     private String city;
     private PersonResponseData person;
+
+    public AddressResponseData(){}
 
     public AddressResponseData(Long id, String logradouro, String cep, String houseNumber, String city, PersonResponseData person) {
         this.id = id;
