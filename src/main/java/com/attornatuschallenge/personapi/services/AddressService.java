@@ -47,6 +47,10 @@ public class AddressService {
         try{
             Address entity = repository.getReferenceById(id);
             updateData(entity, address);
+            if(address.getMain()) {
+                Optional<Person> person = personRepository.findById(entity.getPersonId());
+                person.get().setMainAddressId(id);
+            }
             return repository.save(entity);
         }catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There's no address registered with this id!");

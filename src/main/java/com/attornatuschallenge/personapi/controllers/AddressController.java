@@ -26,6 +26,7 @@ public class AddressController {
     public ResponseEntity<Address> update(@Valid @RequestBody Address address, @PathVariable Long id) {
         Address result = service.update(id, address);
         Person person = personService.findPersonAllInfoById(result.getPersonId());
+        personService.update(person.getId(), person);
         return new ResponseEntity("Updated " + person.getName() +"'s address info", HttpStatus.OK);
     }
 
