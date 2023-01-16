@@ -1,11 +1,11 @@
-# Projeto AttornatusAPI
+# Projeto PersonAPI
 Consiste em uma simples API que permite o registro de pessoas e seus dados.
 
 <p align="center">
-  <img  src="https://scontent.ffor11-1.fna.fbcdn.net/v/t39.30808-6/291155788_749134162931729_5904111411624050166_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=UhqK0Dd999cAX9Zd6oZ&_nc_ht=scontent.ffor11-1.fna&oh=00_AfDZtIiaJqWps8lEsieehEPjS-wZ4rBoYTvcufUdfXh-sg&oe=63C0C550" height="180px">
+  <img  src="https://img.freepik.com/premium-vector/young-good-looking-man-doing-arm-crossed-pose-with-confident_97632-4855.jpg?w=2000" height="180px">
 </p>
 <h1 align="center">
-  AttornatusAPI
+  PersonAPI
 </h1>
 <div align="center">
 
