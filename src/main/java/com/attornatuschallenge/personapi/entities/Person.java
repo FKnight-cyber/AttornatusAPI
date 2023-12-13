@@ -7,6 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity(name = "Person")
 @Table(name = "person")
@@ -19,7 +20,6 @@ public class Person implements Serializable {
     private Long mainAddressId;
     @NotEmpty(message = "Name is required.")
     private String name;
-    @NotEmpty(message = "Birthdate is required.")
     private String birthDate;
     @OneToMany(
             mappedBy = "person",
@@ -53,6 +53,10 @@ public class Person implements Serializable {
 
     public String getBirthDate() {
         return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public List<Address> getAddresses() {

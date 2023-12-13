@@ -11,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PersonService {
@@ -66,9 +64,26 @@ public class PersonService {
     };
 
     public List<Person> findByName(String name) {
+        // Log a message before executing the database query
+        Map<String, Object> logData = new HashMap<>();
+        logData.put("query", "findByName");
+        logData.put("name", name);
+        System.out.println("------------------------------ Logs ----------------------------");
+        System.out.println(logData);
+        System.out.println("------------------------------ Logs ----------------------------");
+
+        // Execute the database query
         List<Person> people = repository.findByName(name);
+
+        // Log the results of the query
+        logData = new HashMap<>();
+        logData.put("query", "findByName");
+        logData.put("name", name);
+        logData.put("result_count", people.size());
+
+        // Return the results of the query
         return people;
-    };
+    }
 
     public Person mainAddressInfo(Long id) {
         Person person = findPersonAllInfoById(id);
@@ -94,13 +109,20 @@ public class PersonService {
 
     public Person update(Long id, Person person) {
         try {
-            Person entity = repository.getReferenceById(id);
-            updateData(entity, person);
-            return repository.save(entity);
-        }catch (EntityNotFoundException e) {
+            Optional<Person> optionalPerson = repository.findById(id);
+
+            if (optionalPerson.isPresent()) {
+                Person entity = optionalPerson.get();
+                updateData(entity, person);
+                return repository.save(entity);
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There's no person registered with this id!");
+            }
+        } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There's no person registered with this id!");
         }
     }
+
 
     private void updateData(Person entity, Person person) {
         entity.setName(person.getName());
@@ -115,6 +137,10 @@ public class PersonService {
 
             person.addAddress(addressInfo);
         }
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }
 

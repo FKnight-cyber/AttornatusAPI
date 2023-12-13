@@ -15,7 +15,6 @@ public class Address implements Serializable {
     private Long id;
     @NotEmpty(message = "Logradouro is required.")
     private String logradouro;
-    @Pattern(regexp = "^[0-9]{8}$", message = "Invalid CEP")
     private String CEP;
     @NotEmpty(message = "House number is required.")
     private String houseNumber;

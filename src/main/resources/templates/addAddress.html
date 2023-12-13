@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Address</title>
+</head>
+<body>
+
+<h2>Add Address</h2>
+
+<form th:action="@{/people/{id}/address/add}" method="post" th:object="${address}">
+  <!-- Hidden field for person ID -->
+  <input type="hidden" name="personId" th:value="${personId}">
+
+  <!-- Logradouro -->
+  <div>
+    <label for="logradouro">Logradouro:</label>
+    <input type="text" id="logradouro" name="logradouro" th:field="*{logradouro}" required>
+  </div>
+
+  <!-- CEP -->
+  <div>
+    <label for="CEP">CEP:</label>
+    <input type="text" id="CEP" name="CEP" th:field="*{CEP}" required>
+  </div>
+
+  <!-- House Number -->
+  <div>
+    <label for="houseNumber">House Number:</label>
+    <input type="text" id="houseNumber" name="houseNumber" th:field="*{houseNumber}" required>
+  </div>
+
+  <!-- City -->
+  <div>
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" th:field="*{city}" required>
+  </div>
+
+  <!-- Main Checkbox -->
+  <div>
+    <label for="main">Main:</label>
+    <input type="checkbox" id="main" name="main" th:field="*{main}">
+  </div>
+
+  <!-- Submit Button -->
+  <div>
+    <button type="submit">Save Address</button>
+  </div>
+</form>
+
+</body>
+</html>
+

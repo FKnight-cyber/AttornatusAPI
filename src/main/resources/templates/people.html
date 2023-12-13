@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of People</title>
+</head>
+<body>
+
+<a th:href="@{/people/add/person}"><button type="button">Register new person</button></a>
+
+<h2>List of People</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Birth Date</th>
+        <th>Addresses</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${people}">
+        <td th:text="${person.id}"></td>
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.birthDate}"></td>
+        <td>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>Street</th>
+                    <th>ZIP Code</th>
+                    <th>House Number</th>
+                    <th>City</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="address : ${person.addresses}">
+                    <td th:text="${address.logradouro}"></td>
+                    <td th:text="${address.cep}"></td>
+                    <td th:text="${address.houseNumber}"></td>
+                    <td th:text="${address.city}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+            <!-- Link to update page for the specific person -->
+            <a th:href="@{'/people/' + ${person.id}}">Update</a>
+
+        </td>
+        <td>
+            <form th:action="@{/people/delete}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <input type="hidden" name="id" th:value="${person.id}" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+
